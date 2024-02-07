@@ -6,6 +6,10 @@ import CartContext from '../../store/cart-context';
 const Cart=(props)=>{
     const cartCtx=useContext(CartContext)
     let totalAmount=0
+    const onRemove=(id)=>{
+        
+        cartCtx.removeItem(id)
+    }
     const cartItem= <ul className={classes['cart-items']}>
         {cartCtx.items.map(item=>{
             totalAmount+=item.price*item.quantity
@@ -14,7 +18,9 @@ const Cart=(props)=>{
            id={item.id} 
            name={item.name}
            quantity={item.quantity}
+           onRemove={onRemove.bind(null,item.id)}
            price={item.price}/>
+           
     })}</ul>
     
     return(
